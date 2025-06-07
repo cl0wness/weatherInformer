@@ -49,6 +49,7 @@ class CurrentWeatherViewModel (
      * @param withLoading указывает, показывать ли индикатор загрузки
      */
     private suspend fun getWeather(withLoading: Boolean = false) {
+        // Загрузка отображается только при первой загрузке (если это не рефреш), далее происходит фоном
         _state.value = _state.value.copy(isLoading = true && withLoading)
 
         val location = getLocation()

@@ -95,10 +95,11 @@ fun CurrentWeatherScreen(
             permissionState.launchPermissionRequest()
         }
     }
-
     // При получении разрешения в процессе, обновляем экран
+    val lastStatus = rememberSaveable { mutableStateOf(permissionState.status.isGranted) }
     LaunchedEffect(permissionState.status.isGranted) {
-        if (permissionState.status.isGranted) {
+        if (permissionState.status.isGranted != lastStatus.value) {
+            lastStatus.value = permissionState.status.isGranted
             viewModel.onEvent(ScreenEvent.Refresh)
         }
     }

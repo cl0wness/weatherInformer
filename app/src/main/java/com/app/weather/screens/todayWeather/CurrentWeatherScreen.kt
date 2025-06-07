@@ -124,7 +124,15 @@ fun CurrentWeatherScreen(
             Spacer(Modifier.height(32.dp))
 
             Text(
-                text = stringResource(R.string.today_weather),
+                text = stringResource(R.string.weather_now),
+                style = MaterialTheme.typography.titleLarge,
+                color = White
+            )
+
+            Spacer(Modifier.height(8.dp))
+
+            Text(
+                text = state.weather?.locationName.orEmpty(),
                 style = MaterialTheme.typography.titleLarge,
                 color = White
             )
@@ -143,7 +151,7 @@ fun CurrentWeatherScreen(
                         Image(
                             painter = rememberAsyncImagePainter(model = icon),
                             contentDescription = null,
-                            modifier = Modifier.size(96.dp)
+                            modifier = Modifier.size(80.dp)
                         )
                     }
 

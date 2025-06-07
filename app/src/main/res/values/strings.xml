@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">weather</string>
-    <string name="today_weather">Погода на сегодня</string>
+    <string name="weather_now">Погода сейчас</string>
     <string name="feels_like">Ощущается как %d°</string>
     <string name="humidity_full">💧 Влажность: %d%%</string>
     <string name="wind_full">💨 Ветер: %d м/с</string>

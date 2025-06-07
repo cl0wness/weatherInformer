@@ -4,6 +4,7 @@ import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -44,6 +45,7 @@ import coil.compose.rememberAsyncImagePainter
 import com.app.data.weather.api.model.DailyForecast
 import com.app.weather.R
 import com.app.weather.screens.event.UIEvent
+import com.app.weather.screens.weekWeather.components.DayWeatherItem
 import com.app.weather.ui.theme.DarkBlue
 import com.app.weather.ui.theme.LightBlue
 import com.app.weather.ui.theme.White
@@ -85,11 +87,11 @@ fun WeeklyWeatherScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         item {
-            Row(
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 8.dp, bottom = 24.dp),
-                verticalAlignment = Alignment.CenterVertically
+                    .padding(top = 8.dp, start = 8.dp, end = 8.dp),
+                contentAlignment = Alignment.CenterStart
             ) {
                 IconButton(onClick = onBackClick) {
                     Icon(
@@ -100,9 +102,11 @@ fun WeeklyWeatherScreen(
                 }
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
+                    modifier = Modifier.fillMaxWidth(),
                     text = stringResource(R.string.weather_on_week),
                     style = MaterialTheme.typography.titleMedium,
-                    color = White
+                    color = White,
+                    textAlign = TextAlign.Center
                 )
             }
         }
@@ -116,7 +120,15 @@ fun WeeklyWeatherScreen(
             }
         } else {
             state.weekWeather?.let {
-                items(it) { day ->
+                item {
+                    Text(
+                        text = state.weekWeather?.locationName.orEmpty(),
+                        style = MaterialTheme.typography.titleMedium,
+                        color = White,
+                        modifier = Modifier.padding(bottom = 16.dp)
+                    )
+                }
+                items(it.weather) { day ->
                     DayWeatherItem(day, modifier = Modifier.padding(horizontal = 16.dp))
                 }
             } ?: item {
@@ -124,60 +136,6 @@ fun WeeklyWeatherScreen(
                     text = stringResource(R.string.couldn_t_upload_data),
                     style = MaterialTheme.typography.titleMedium,
                     color = White
-                )
-            }
-        }
-    }
-}
-
-@Composable
-fun DayWeatherItem(data: DailyForecast, modifier: Modifier = Modifier) {
-    Card(
-        modifier = modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors().copy(containerColor = White)
-    ) {
-        Row(
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Text(
-                text = data.date.toString(),
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.width(100.dp)
-            )
-            Column {
-                Text(
-                    style = MaterialTheme.typography.labelSmall,
-                    text = stringResource(R.string.humidity, data.weather.humidity),
-                )
-                Spacer(modifier = Modifier.height(4.dp))
-                Text(
-                    style = MaterialTheme.typography.labelSmall,
-                    text = stringResource(R.string.wind, data.weather.windSpeed),
-                )
-            }
-            Spacer(modifier = Modifier.width(20.dp))
-
-            data.weather.iconUrl?.let { icon ->
-                Image(
-                    painter = rememberAsyncImagePainter(model = icon),
-                    contentDescription = null,
-                    modifier = Modifier.size(40.dp)
-                )
-            }
-
-            Column {
-                Text(
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.End,
-                    text = "${data.weather.tempMax}° / ${data.weather.tempMin}°",
-                    style = MaterialTheme.typography.labelMedium,
-                )
-                Text(
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.End,
-                    text = data.weather.description.orEmpty()
-                        .replaceFirstChar(Char::uppercaseChar),
-                    style = MaterialTheme.typography.labelSmall,
                 )
             }
         }

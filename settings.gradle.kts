@@ -21,4 +21,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "weather"
 include(":app")
-include(":feature:todayWeather")

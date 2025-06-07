@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">weather</string>
+    <string name="today_weather">Погода на сегодня</string>
+    <string name="feels_like">Ощущается как %d°</string>
+    <string name="humidity_full">💧 Влажность: %d%%</string>
+    <string name="wind_full">💨 Ветер: %d м/с</string>
+    <string name="humidity">💧: %d%%</string>
+    <string name="wind">💨: %d м/с</string>
+    <string name="couldn_t_upload_data">Не удалось загрузить данные</string>
+    <string name="error_was_happened">Произошла ошибка:</string>
+    <string name="weather_on_week">Погода на неделю</string>
+    <string name="for_full_app_work_need_permision_to_location">Для полноценной работы приложения нужно разрешение на местоположение</string>
+    <string name="open_settings">Открыть настройки</string>
 </resources>

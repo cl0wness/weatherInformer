@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    kotlin("kapt")
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -52,17 +52,19 @@ android {
 
 dependencies {
 
-    implementation(project(":data:weather:api"))
+    implementation(project(":data:weather:impl"))
 
     implementation(libs.coil.compose)
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
-    implementation(libs.androidx.hilt.lifecycle.viewmodel)
-    kapt(libs.androidx.hilt.compiler)
+    implementation(libs.koin.androidx.compose)
+    implementation(libs.retrofit.kotlinx.serialization.converter)
+    implementation(libs.okhttp)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.accompanist.permissions)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.navigation.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)

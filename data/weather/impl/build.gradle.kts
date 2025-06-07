@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -33,6 +34,13 @@ android {
 }
 
 dependencies {
+    api(libs.retrofit)
+    implementation(libs.retrofit.kotlinx.serialization.converter)
+    implementation(libs.okhttp)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.koin.androidx.compose)
+
+    api(project(":data:weather:api"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

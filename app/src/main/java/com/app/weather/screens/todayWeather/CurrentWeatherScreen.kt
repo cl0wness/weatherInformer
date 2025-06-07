@@ -127,7 +127,8 @@ fun CurrentWeatherScreen(
             Text(
                 text = stringResource(R.string.weather_now),
                 style = MaterialTheme.typography.titleLarge,
-                color = White
+                color = White,
+                textAlign = TextAlign.Center
             )
 
             Spacer(Modifier.height(8.dp))
@@ -135,7 +136,8 @@ fun CurrentWeatherScreen(
             Text(
                 text = state.weather?.locationName.orEmpty(),
                 style = MaterialTheme.typography.titleLarge,
-                color = White
+                color = White,
+                textAlign = TextAlign.Center
             )
 
             Spacer(Modifier.height(20.dp))
@@ -167,16 +169,17 @@ fun CurrentWeatherScreen(
                     Spacer(Modifier.height(4.dp))
 
                     Text(
-                        text = weather.description.orEmpty()
-                            .replaceFirstChar(Char::uppercaseChar),
+                        text = weather.description.orEmpty(),
                         style = MaterialTheme.typography.titleMedium,
-                        color = White
+                        color = White,
+                        textAlign = TextAlign.Center
                     )
 
                     Spacer(Modifier.height(12.dp))
 
                     Text(
                         style = MaterialTheme.typography.bodyLarge,
+                        textAlign = TextAlign.Center,
                         text = stringResource(R.string.feels_like, weather.feelsLike.toInt()),
                         color = White.copy(alpha = 0.8f)
                     )
@@ -190,18 +193,23 @@ fun CurrentWeatherScreen(
                         Text(
                             style = MaterialTheme.typography.bodyMedium,
                             text = stringResource(R.string.humidity_full, weather.humidity),
-                            color = White
+                            color = White,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.weight(1f)
                         )
                         Text(
                             style = MaterialTheme.typography.bodyMedium,
                             text = stringResource(R.string.wind_full, weather.windSpeed),
-                            color = White
+                            color = White,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.weight(1f)
                         )
                     }
                 } ?: Text(
                     text = stringResource(R.string.couldn_t_upload_data),
                     style = MaterialTheme.typography.titleMedium,
-                    color = White
+                    color = White,
+                    textAlign = TextAlign.Center
                 )
             }
         }

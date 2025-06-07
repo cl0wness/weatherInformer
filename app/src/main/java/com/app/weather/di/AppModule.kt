@@ -8,25 +8,38 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 
 val appModule = module {
+    // OkHttp с добавлением ключа API
     single {
         OkHttpClient.Builder()
             .addInterceptor { chain ->
-                val originalRequest = chain.request()
-                val url = originalRequest.url.newBuilder()
-                    .addQueryParameter("key", "09995898a16f474e9f5200254250706")
+                val original = chain.request()
+                val originalUrl = original.url
+
+                val url = originalUrl.newBuilder()
+                    .addQueryParameter("key", "7125fcecd897483cb4f214840250706")
                     .build()
-                val request = originalRequest.newBuilder().url(url).build()
+
+                val request = original.newBuilder()
+                    .url(url)
+                    .build()
+
                 chain.proceed(request)
             }
             .build()
     }
 
+    // Json конвертер
+    single {
+        Json { ignoreUnknownKeys = true }
+    }
+
+    // Retrofit-инстанс
     single {
         val contentType = "application/json".toMediaType()
-        val json = Json { ignoreUnknownKeys = true }
+        val json: Json = get()
 
         Retrofit.Builder()
-            .baseUrl("https://api.weatherbit.io/v2.0/") // новая база
+            .baseUrl("https://api.weatherapi.com/v1/")
             .client(get())
             .addConverterFactory(json.asConverterFactory(contentType))
             .build()

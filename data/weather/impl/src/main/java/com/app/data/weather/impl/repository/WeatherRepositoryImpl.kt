@@ -16,7 +16,7 @@ class WeatherRepositoryImpl (
         lon: Double
     ): Resource<CurrentWeatherModel, String> {
         return dataSource.fetchCurrentWeather(lat = lat, lon = lon)
-            .mapData { it.data.first().toDomain() }
+            .mapData { it.current.toDomain()}
     }
 
     override suspend fun fetchWeeklyWeather(
@@ -24,7 +24,7 @@ class WeatherRepositoryImpl (
         lon: Double
     ): Resource<List<DailyForecast>, String> {
         return dataSource.fetchWeekWeather(lat = lat, lon = lon).mapData { response ->
-            response.data.map { it.toDomain() }
+            response.forecast.forecastDay.map { it.toDomain() }
         }
     }
 }

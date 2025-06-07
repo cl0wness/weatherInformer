@@ -9,6 +9,10 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/data" />
+            <option value="$PROJECT_DIR$/data/weather" />
+            <option value="$PROJECT_DIR$/data/weather/api" />
+            <option value="$PROJECT_DIR$/data/weather/impl" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

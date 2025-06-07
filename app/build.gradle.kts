@@ -52,6 +52,8 @@ android {
 
 dependencies {
 
+    implementation(project(":data:weather:api"))
+
     implementation(libs.coil.compose)
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)

@@ -15,5 +15,5 @@ data class WeatherModel (
     val humidity: Int,
     val windSpeed: Int,
     val description: String? = null,
-    val iconUrl: String? = null
+    val iconUrl: String? = null,
 )

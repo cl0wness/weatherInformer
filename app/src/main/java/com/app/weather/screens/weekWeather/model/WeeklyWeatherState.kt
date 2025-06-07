@@ -2,6 +2,7 @@ package com.app.weather.screens.weekWeather.model
 
 import com.app.data.weather.api.model.CurrentWeatherModel
 import com.app.data.weather.api.model.DailyForecast
+import com.app.data.weather.api.model.ForecastModel
 
 /**
  * Состояние экрана погоды на неделю.
@@ -11,5 +12,5 @@ import com.app.data.weather.api.model.DailyForecast
  */
 data class WeeklyWeatherState(
     val isLoading: Boolean = false,
-    val weekWeather: List<DailyForecast>? = null,
+    val weekWeather: ForecastModel? = null,
 )

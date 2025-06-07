@@ -1,12 +1,15 @@
 import com.app.data.weather.api.model.DailyForecast
+import com.app.data.weather.api.model.ForecastModel
 import com.app.data.weather.api.model.WeatherModel
 import com.app.data.weather.impl.remote.model.ConditionApiModel
+import com.app.data.weather.impl.remote.model.LocationApiModel
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class ForecastResponse(
-    @SerialName("forecast") val forecast: ForecastApiModel
+    @SerialName("forecast") val forecast: ForecastApiModel,
+    @SerialName("location") val location: LocationApiModel
 )
 
 @Serializable
@@ -30,16 +33,22 @@ data class DayWeatherApiModel(
     @SerialName("condition") val condition: ConditionApiModel
 )
 
-fun ForecastDayApiModel.toDomain() : DailyForecast {
-    return DailyForecast(
-        date = date,
-        weather = WeatherModel(
-            tempMax = day.maxTempC.toInt(),
-            tempMin = day.minTempC.toInt(),
-            humidity = day.avgHumidity.toInt(),
-            windSpeed = (day.maxWindKph / 3.6).toInt(),
-            description = day.condition.text,
-            iconUrl = "https:${day.condition.icon}"
-        )
+fun ForecastResponse.toDomain() : ForecastModel {
+    return ForecastModel(
+        locationName = location.name,
+        weather = forecast.forecastDay.map { item ->
+            DailyForecast(
+                date = item.date,
+                locationName = "",
+                weather = WeatherModel(
+                    tempMax = item.day.maxTempC.toInt(),
+                    tempMin = item.day.minTempC.toInt(),
+                    humidity = item.day.avgHumidity.toInt(),
+                    windSpeed = (item.day.maxWindKph / 3.6).toInt(),
+                    description = item.day.condition.text,
+                    iconUrl = "https:${item.day.condition.icon}",
+                )
+            )
+        }
     )
 }

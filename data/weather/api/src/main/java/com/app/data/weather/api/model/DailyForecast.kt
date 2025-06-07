@@ -10,5 +10,6 @@ import java.util.Date
  */
 data class DailyForecast(
     val date: String,
+    val locationName: String,
     val weather: WeatherModel
 )

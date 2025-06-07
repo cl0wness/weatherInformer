@@ -31,13 +31,14 @@ data class ConditionApiModel(
     @SerialName("icon") val icon: String
 )
 
-fun CurrentApiModel.toDomain() : CurrentWeatherModel {
+fun CurrentWeatherResponse.toDomain() : CurrentWeatherModel {
     return CurrentWeatherModel(
-        temperature = tempC.toInt(),
-        feelsLike = feelsLikeC.toInt(),
-        humidity = humidity,
-        windSpeed = (windKph / 3.6).toInt(),
-        description = condition.text,
-        iconUrl =  "https:${condition.icon}"
+        temperature = current.tempC.toInt(),
+        feelsLike = current.feelsLikeC.toInt(),
+        humidity = current.humidity,
+        windSpeed = (current.windKph / 3.6).toInt(),
+        description = current.condition.text,
+        iconUrl =  "https:${current.condition.icon}",
+        locationName = location.name
     )
 }
